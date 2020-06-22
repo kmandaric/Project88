@@ -19,12 +19,14 @@ private:
 	//Animation idleAnimation;
 
 	sf::Vector2f acceleration{}, velocity{}, position{};
-	bool isJumping = false, isLongJumping = false;
 	float timeSinceJumpStart=0, longJumpTime= .5f;
 
 public:
 	sf::Texture idleSheet;
 	sf::Sprite sprite;
+	Collider collider;
+
+	bool isJumping = false, isLongJumping = false;
 	
 public:
 	Player();

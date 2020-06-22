@@ -4,17 +4,18 @@
 #include "Animation.h"
 #include "Game.h"
 
+
 void Player::set_current_animation(std::string anim, bool flip) {
 	currentAnimation = &animations[anim];
 	animations[anim].setSprite(&this->sprite, flip);
 }
 
-Player::Player()
+Player::Player():collider(Collider(&sprite))
 {
 	this->initVariables();
 	this->initTexture();
 	this->initSprite();
-	this->sprite.setPosition(50, 50);
+	this->sprite.setPosition(70, 200);
 
 	animations["run"] = Animation("Res/Run_Sheet.png", &this->sprite, sf::IntRect(0, 0, 416, 454), 5, 4, 0.032f);
 	animations["idle"] = Animation("Res/Idle_Sheet.png", &this->sprite, sf::IntRect(0, 0, 416, 454), 4, 4, 0.032f);
@@ -107,8 +108,8 @@ void Player::updateMovement(float dt, float time)
 	this->sprite.move(velocity*dt);
 
 	if (this->sprite.getPosition().y > 655) {
-		this->sprite.setPosition(this->sprite.getPosition().x, 655);
-		isJumping = isLongJumping = false;
+		//this->sprite.setPosition(this->sprite.getPosition().x, 655);
+		
 	}
 
 	//TODO COLLISION DETECTION
@@ -122,8 +123,7 @@ void Player::updateMovement(float dt, float time)
 	}*/
 	
 }
-int sizeX = 406, sizeY = 420;
-int posX = 0, posY = 0;
+
 void Player::update(float dt, float time)
 {
 	//std::cout << dt << std::endl;
@@ -131,8 +131,6 @@ void Player::update(float dt, float time)
 	acceleration.y = 9.81;
 	this->updateMovement(dt, time);
 	if(currentAnimation) currentAnimation->update(dt, time);
-
-
 }
 
 void Player::render(sf::RenderTarget & target)

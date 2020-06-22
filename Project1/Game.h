@@ -3,6 +3,9 @@
 #include<SFML/System.hpp>
 #include<SFML/Window.hpp>
 #include "Player.h"
+#include"Collider.h"
+#include"Platform.h"
+#include<vector>
 
 /* 
 	
@@ -18,7 +21,7 @@ private:
 	sf::Sprite bg;
 	sf::Texture bgt;
 
-	
+	std::vector<Platform*> platforms;
 
 	Player* player;
 

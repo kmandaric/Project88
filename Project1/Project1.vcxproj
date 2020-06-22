@@ -133,6 +133,7 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
@@ -140,6 +141,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

@@ -8,12 +8,24 @@ Game::Game()
 	this->initializeVariables();
 	this->initWindow();
 	this->initPlayer();
+
+	platforms.push_back(new Platform({ 245, 735 }, "Res/LongPlatform.png"));
+	platforms.push_back(new Platform({ 105, 525 }, "Res/Tiles/grass.png"));
+	platforms.push_back(new Platform({ 385, 525 }, "Res/Tiles/grass.png"));
+	platforms.push_back(new Platform({ 245, 385 }, "Res/Tiles/grass.png"));
+	platforms.push_back(new Platform({ 35, 105 }, "Res/Tiles/grass.png"));
+	platforms.push_back(new Platform({ 455, 105 }, "Res/Tiles/grass.png"));
+
+
 }
 
 Game::~Game()
 {
-	delete this->window;
+	for (auto p : platforms)
+		delete p;
+
 	delete this->player;
+	delete this->window;
 }
 
 //Private functions
@@ -30,7 +42,8 @@ void Game::initWindow()
 	this->window->setFramerateLimit(60);
 	
 	bgt.loadFromFile("Res/TestMap.png");
-	this->bg = sf::Sprite(bgt);
+	//this->bg = sf::Sprite(bgt);
+
 }
 
 //Initialize player
@@ -82,6 +95,14 @@ void Game::update()
 
 	this->pollEvents();
 	this->updatePlayer();
+	
+	for (Platform* p : platforms)
+	{
+		if (player->collider.CheckCollision(p->collider, 0.0f)) 
+		{
+			player->isJumping = player->isLongJumping = false;
+		}
+	}
 }
 
 void Game::render()
@@ -94,7 +115,16 @@ void Game::render()
 	this->window->clear();
 
 	// Draw game objects
-	this->window->draw(bg);
+	//for (auto & platform : platforms)
+	//{
+	//	platform.render(*this->window);
+	//}
+	for (Platform* p : platforms)
+	{
+		p->render(*this->window);
+	}
+	
 	this->renderPlayer();
+
 	this->window->display();
 }
