@@ -111,16 +111,6 @@ void Player::updateMovement(float dt, float time)
 		//this->sprite.setPosition(this->sprite.getPosition().x, 655);
 		
 	}
-
-	//TODO COLLISION DETECTION
-	/*if (sprite.getGlobalBounds().intersects(testCollision.getGlobalBounds()))
-	{
-		std::cout << "collision" << std::endl;
-	}
-	else
-	{
-		std::cout << "no collision" << std::endl;
-	}*/
 	
 }
 

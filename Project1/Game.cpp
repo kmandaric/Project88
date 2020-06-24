@@ -1,10 +1,12 @@
 #include "Game.h"
 #include "Player.h"
 #include "Animation.h"
+#include <iostream>
 
 //Constructors & Destructors
 Game::Game()
 {
+	std::srand(5);
 	this->initializeVariables();
 	this->initWindow();
 	this->initPlayer();
@@ -16,7 +18,23 @@ Game::Game()
 	platforms.push_back(new Platform({ 35, 105 }, "Res/Tiles/grass.png"));
 	platforms.push_back(new Platform({ 455, 105 }, "Res/Tiles/grass.png"));
 
+	lettersToPickUp.push_back(new Letter({ 250, -70 }, "Res/Letters/letter_W.png"));
+	lettersToPickUp.push_back(new Letter({ 250, -70 }, "Res/Letters/letter_I.png"));
+	lettersToPickUp.push_back(new Letter({ 250, -70 }, "Res/Letters/letter_L.png"));
+	lettersToPickUp.push_back(new Letter({ 250, -70 }, "Res/Letters/letter_L.png"));
+	lettersToPickUp.push_back(new Letter({ 250, -70 }, "Res/Letters/letter_Y.png"));
+	lettersToPickUp.push_back(new Letter({ 250, -70 }, "Res/Letters/letter_O.png"));
+	lettersToPickUp.push_back(new Letter({ 250, -70 }, "Res/Letters/letter_U.png"));
+	lettersToPickUp.push_back(new Letter({ 250, -70 }, "Res/Letters/letter_M.png"));
+	lettersToPickUp.push_back(new Letter({ 250, -70 }, "Res/Letters/letter_A.png"));
+	lettersToPickUp.push_back(new Letter({ 250, -70 }, "Res/Letters/letter_R.png"));
+	lettersToPickUp.push_back(new Letter({ 250, -70 }, "Res/Letters/letter_R.png"));
+	lettersToPickUp.push_back(new Letter({ 250, -70 }, "Res/Letters/letter_Y.png"));
+	lettersToPickUp.push_back(new Letter({ 250, -70 }, "Res/Letters/letter_M.png"));
+	lettersToPickUp.push_back(new Letter({ 250, -70 }, "Res/Letters/letter_E.png"));
+	numLettersToCollect = lettersToPickUp.size();
 
+	
 }
 
 Game::~Game()
@@ -24,6 +42,12 @@ Game::~Game()
 	for (auto p : platforms)
 		delete p;
 
+	for (auto p : lettersToPickUp)
+		delete p;
+
+	for (auto p : pickedUpLetters)
+		delete p;
+	
 	delete this->player;
 	delete this->window;
 }
@@ -96,12 +120,49 @@ void Game::update()
 	this->pollEvents();
 	this->updatePlayer();
 	
+	if (currentLetterToPickUp)
+	{
+		currentLetterToPickUp->update(deltaTime, time.asSeconds());
+	}
+	else
+	{
+		if (lettersToPickUp.size()>0)
+		{
+			int index = rand() % lettersToPickUp.size();
+			auto found = std::find(lettersToPickUp.begin(), lettersToPickUp.end(), lettersToPickUp[index]);
+			if (found != lettersToPickUp.end())
+			{
+				currentLetterToPickUp = lettersToPickUp[index];
+				lettersToPickUp.erase(found);
+			}
+		}
+	}
+
 	for (Platform* p : platforms)
 	{
+		if (currentLetterToPickUp)
+		{
+			if (p->collider.CheckCollision(currentLetterToPickUp->collider, 1.0f))
+			{
+				
+			}
+		}
+
 		if (player->collider.CheckCollision(p->collider, 0.0f)) 
 		{
 			player->isJumping = player->isLongJumping = false;
+			
 		}
+	}
+	if (currentLetterToPickUp && player->collider.CheckCollision(currentLetterToPickUp->collider, 0.0f))
+	{
+		pickedUpLetters.push_back(currentLetterToPickUp);
+		currentLetterToPickUp = nullptr;
+	}
+	if (pickedUpLetters.size()== numLettersToCollect)
+	{
+		//TODO MAKE FONT AND PUT TEXT sf::Text EndText("Will you marry me.",)
+		std::cout << "Will you marry me?" << std::endl;
 	}
 }
 
@@ -123,7 +184,10 @@ void Game::render()
 	{
 		p->render(*this->window);
 	}
-	
+	if (currentLetterToPickUp)
+	{
+		this->currentLetterToPickUp->render(*this->window);
+	}
 	this->renderPlayer();
 
 	this->window->display();

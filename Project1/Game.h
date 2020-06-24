@@ -5,6 +5,7 @@
 #include "Player.h"
 #include"Collider.h"
 #include"Platform.h"
+#include"Letter.h"
 #include<vector>
 
 /* 
@@ -22,6 +23,9 @@ private:
 	sf::Texture bgt;
 
 	std::vector<Platform*> platforms;
+	std::vector<Letter*> lettersToPickUp, pickedUpLetters;
+	Letter* currentLetterToPickUp = nullptr;
+	int numLettersToCollect;
 
 	Player* player;
 
