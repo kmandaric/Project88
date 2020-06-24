@@ -18,7 +18,8 @@ private:
 	Animation *currentAnimation = nullptr;
 	//Animation idleAnimation;
 
-	sf::Vector2f acceleration{}, velocity{}, position{};
+	float moveSpeed = 50.0f, maxSpeed = 400.0f, friction = 7.0f;
+	sf::Vector2f velocity{}, position{};
 	float timeSinceJumpStart=0, longJumpTime= .5f;
 
 public:
