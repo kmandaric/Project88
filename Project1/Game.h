@@ -21,11 +21,13 @@ private:
 	sf::Event event;
 	sf::Sprite bg;
 	sf::Texture bgt;
-
+	sf::Font endFont;
+	sf::Text endText; 
 	std::vector<Platform*> platforms;
 	std::vector<Letter*> lettersToPickUp, pickedUpLetters;
 	Letter* currentLetterToPickUp = nullptr;
 	int numLettersToCollect;
+	bool end = false;
 
 	Player* player;
 

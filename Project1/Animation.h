@@ -22,5 +22,6 @@ public:
 	~Animation();
 	void update(float dt, float time);
 	void setSprite(sf::Sprite* sprite, bool flip=false);
+	sf::Vector2f spriteScale{ 0.17f , 0.17f };
 };
 

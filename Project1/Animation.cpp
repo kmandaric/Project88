@@ -54,11 +54,11 @@ void Animation::setSprite(sf::Sprite * sprite, bool flip)
 	this->sprite->setOrigin(this->sprite->getTextureRect().width/2, this->sprite->getTextureRect().height / 2);
 	if (flip)
 	{
-		this->sprite->setScale(-0.2, 0.2);
+		this->sprite->setScale(-spriteScale.x, spriteScale.y);
 	}
 	else
 	{
-		this->sprite->setScale(0.2, 0.2);
+		this->sprite->setScale(spriteScale);
 	}
 	
 }

@@ -10,8 +10,9 @@ public:
 	sf::Sprite sprite;
 	sf::Texture texture;
 	Collider collider;
+	char letter = 0;
 
-	Letter(sf::Vector2f position, std::string path): collider(Collider(&sprite))
+	Letter(sf::Vector2f position, char letter, std::string path): collider(Collider(&sprite)), letter(letter)
 	{
 		texture.loadFromFile(path);
 		sprite.setTexture(texture);

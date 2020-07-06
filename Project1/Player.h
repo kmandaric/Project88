@@ -18,15 +18,15 @@ private:
 	Animation *currentAnimation = nullptr;
 	//Animation idleAnimation;
 
-	float moveSpeed = 50.0f, maxSpeed = 400.0f, friction = 7.0f;
-	sf::Vector2f velocity{}, position{};
+	float moveSpeed = 50.0f, maxSpeed = 400.0f, friction = 15.0f;
+	
 	float timeSinceJumpStart=0, longJumpTime= .5f;
 
 public:
 	sf::Texture idleSheet;
 	sf::Sprite sprite;
 	Collider collider;
-
+	sf::Vector2f velocity{}, position{};
 	bool isJumping = false, isLongJumping = false;
 	
 public:

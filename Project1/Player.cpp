@@ -49,15 +49,16 @@ void Player::initSprite()
 
 }
 
-
-
+bool isPressedW = false;
 void Player::updateMovement(float dt, float time)
 {
-
+	velocity += sf::Vector2f(0.0f, 10.f);
 	set_current_animation("idle");
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) //Up
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && !isJumping) //Up
 	{
-		velocity += sf::Vector2f(0.0f, 0.0f);
+		velocity += sf::Vector2f(0.0f, -850.f);
+		isJumping  = true; 
+		
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) //Left
 	{
@@ -67,26 +68,30 @@ void Player::updateMovement(float dt, float time)
 	{
 		velocity += sf::Vector2f(moveSpeed, 0.0f);
 	}
+
+	//Velocity clamping
+	if (velocity.x < -maxSpeed)
+	{
+		velocity.x = -maxSpeed;
+	}
+	else if(velocity.x > maxSpeed)
+	{
+		velocity.x = maxSpeed;
+	}
+
 	
-		if (velocity.x < -maxSpeed)
-		{
-			velocity.x = -maxSpeed;
-		}
-		else if(velocity.x > maxSpeed)
-		{
-			velocity.x = maxSpeed;
-		}
 	if (isJumping)
 	{
 		velocity.y += 10.0f;
 	}
 	else
 	{
-		if (velocity.x>0.1)
+		float frictionStopper = (friction + 0.5);
+		if (velocity.x>frictionStopper)
 		{
 			velocity.x -= friction;
 		}
-		else if(velocity.x < -0.1)
+		else if(velocity.x < -frictionStopper)
 		{
 			velocity.x += friction;
 		}
@@ -96,12 +101,6 @@ void Player::updateMovement(float dt, float time)
 		}
 	}
 	this->sprite.move(velocity*dt);
-	std::cout <<velocity.x << " " << velocity.y << std::endl;
-	std::cout << sprite.getPosition().x << " " << sprite.getPosition().y << std::endl;
-	//if (sprite.getPosition().x < sprite.getTexture()->getSize().x/2)
-	//{
-	//	sprite.setPosition(sprite.getTexture()->getSize().x / 2+1, sprite.getPosition().y);
-	//}
 }
 
 void Player::update(float dt, float time)

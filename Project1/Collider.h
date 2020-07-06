@@ -15,6 +15,8 @@ public:
 	sf::Vector2f GetHalfSize() { return sf::Vector2f(body->getGlobalBounds().width / 2.0f, body->getGlobalBounds().height / 2.0f);
 	}
 
+	bool fromTop = false, fromBottom = false, fromLeft = false, fromRight = false;
+
 private: 
 	sf::Sprite* body;
 	bool isStatic = false;

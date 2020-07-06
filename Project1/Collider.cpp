@@ -34,11 +34,19 @@ bool Collider::CheckCollision(Collider & other, float push)
 		
 			if (deltaX > 0.0f)
 			{
+				fromLeft = true;
+				other.fromRight = true;
+				other.fromLeft = other.fromTop = other.fromBottom = false;
+				fromRight = fromTop = fromBottom = false;
 				Move(intersectX * (1.0f - push), 0.0f);
 				other.Move(-intersectX * push, 0.0f);
 			}
 			else
 			{
+				fromRight = true;
+				other.fromLeft = true; 
+				other.fromRight = other.fromTop = other.fromBottom = false;
+				fromLeft = fromTop = fromBottom = false;
 				Move(-intersectX * (1.0f - push), 0.0f);
 				other.Move(intersectX * push, 0.0f);
 			}
@@ -47,11 +55,19 @@ bool Collider::CheckCollision(Collider & other, float push)
 		{
 			if (deltaY > 0.0f)
 			{
+				fromTop = true;
+				other.fromBottom = true; 
+				other.fromLeft = other.fromTop = other.fromRight = false;
+				fromRight = fromLeft = fromBottom = false;
 				Move(0.0f, intersectY * (1.0f - push));
 				other.Move(0.0f, -intersectY * push);
 			}
 			else
 			{
+				fromBottom = true;
+				other.fromTop = true;
+				other.fromLeft = other.fromRight = other.fromBottom = false;
+				fromRight = fromTop = fromLeft = false;
 				Move(0.0f, -intersectY * (1.0f - push));
 				other.Move(0.0f, intersectY * push);
 			}
