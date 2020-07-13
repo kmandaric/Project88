@@ -56,16 +56,19 @@ void Player::updateMovement(float dt, float time)
 	set_current_animation("idle");
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && !isJumping) //Up
 	{
-		velocity += sf::Vector2f(0.0f, -800.f);
+		set_current_animation("jump", true);
+		velocity += sf::Vector2f(0.0f, -830.f);
 		isJumping  = true; 
 		
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) //Left
 	{
+		set_current_animation("run", true);
 		velocity += sf::Vector2f(-moveSpeed, 0.0f);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) //Right
 	{
+		set_current_animation("run", false);
 		velocity += sf::Vector2f(moveSpeed, 0.0f);
 	}
 
