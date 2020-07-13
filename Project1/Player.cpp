@@ -15,7 +15,7 @@ Player::Player():collider(Collider(&sprite))
 	this->initVariables();
 	this->initTexture();
 	this->initSprite();
-	this->sprite.setPosition(200, 200);
+	this->sprite.setPosition(250, 500);
 
 	animations["run"] = Animation("Res/Run_Sheet.png", &this->sprite, sf::IntRect(0, 0, 416, 454), 5, 4, 0.032f);
 	animations["idle"] = Animation("Res/Idle_Sheet.png", &this->sprite, sf::IntRect(0, 0, 416, 454), 4, 4, 0.032f);
@@ -56,7 +56,7 @@ void Player::updateMovement(float dt, float time)
 	set_current_animation("idle");
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && !isJumping) //Up
 	{
-		velocity += sf::Vector2f(0.0f, -850.f);
+		velocity += sf::Vector2f(0.0f, -800.f);
 		isJumping  = true; 
 		
 	}

@@ -14,7 +14,7 @@ Game::Game()
 	platforms.push_back(new Platform({ 245, 735 }, "Res/LongPlatform.png"));
 	platforms.push_back(new Platform({ 105, 525 }, "Res/Tiles/grass.png"));
 	platforms.push_back(new Platform({ 385, 525 }, "Res/Tiles/grass.png"));
-	platforms.push_back(new Platform({ 245, 385 }, "Res/Tiles/grass.png"));
+	platforms.push_back(new Platform({ 245, 365}, "Res/Tiles/grass.png"));
 	platforms.push_back(new Platform({ 35, 105 }, "Res/Tiles/grass.png"));
 	platforms.push_back(new Platform({ 455, 105 }, "Res/Tiles/grass.png"));
 	platforms.push_back(new Platform({ -35, 105 }, "Res/Tiles/grass.png"));
@@ -24,20 +24,20 @@ Game::Game()
 
 
 
-	lettersToPickUp.push_back(new Letter({ 250, -70 }, 'W', "Res/Letters/letter_W.png"));
-	lettersToPickUp.push_back(new Letter({ 250, -70 }, 'I',"Res/Letters/letter_I.png"));
-	lettersToPickUp.push_back(new Letter({ 250, -70 }, 'L',"Res/Letters/letter_L.png"));
-	lettersToPickUp.push_back(new Letter({ 250, -70 }, 'L',"Res/Letters/letter_L.png"));
+	lettersToPickUp.push_back(new Letter({ 40, -70 }, 'W', "Res/Letters/letter_W.png"));
+	lettersToPickUp.push_back(new Letter({ 40, -70 }, 'I',"Res/Letters/letter_I.png"));
+	lettersToPickUp.push_back(new Letter({ 455, -70 }, 'L',"Res/Letters/letter_L.png"));
+	lettersToPickUp.push_back(new Letter({ 455, -70 }, 'L',"Res/Letters/letter_L.png"));
 	lettersToPickUp.push_back(new Letter({ 250, -70 }, 'Y',"Res/Letters/letter_Y.png"));
 	lettersToPickUp.push_back(new Letter({ 250, -70 }, 'O',"Res/Letters/letter_O.png"));
-	lettersToPickUp.push_back(new Letter({ 250, -70 }, 'U',"Res/Letters/letter_U.png"));
-	lettersToPickUp.push_back(new Letter({ 250, -70 }, 'M',"Res/Letters/letter_M.png"));
-	lettersToPickUp.push_back(new Letter({ 250, -70 }, 'A',"Res/Letters/letter_A.png"));
-	lettersToPickUp.push_back(new Letter({ 250, -70 }, 'R',"Res/Letters/letter_R.png"));
-	lettersToPickUp.push_back(new Letter({ 250, -70 }, 'R',"Res/Letters/letter_R.png"));
-	lettersToPickUp.push_back(new Letter({ 250, -70 }, 'Y',"Res/Letters/letter_Y.png"));
-	lettersToPickUp.push_back(new Letter({ 250, -70 }, 'M',"Res/Letters/letter_M.png"));
-	lettersToPickUp.push_back(new Letter({ 250, -70 }, 'E',"Res/Letters/letter_E.png"));
+	lettersToPickUp.push_back(new Letter({ 105, 170 }, 'U',"Res/Letters/letter_U.png"));
+	lettersToPickUp.push_back(new Letter({ 105, 170 }, 'M',"Res/Letters/letter_M.png"));
+	lettersToPickUp.push_back(new Letter({ 105, 170 }, 'A',"Res/Letters/letter_A.png"));
+	lettersToPickUp.push_back(new Letter({ 250, 450 }, 'R',"Res/Letters/letter_R.png"));
+	lettersToPickUp.push_back(new Letter({ 250, 450 }, 'R',"Res/Letters/letter_R.png"));
+	lettersToPickUp.push_back(new Letter({ 385, 170 }, 'Y',"Res/Letters/letter_Y.png"));
+	lettersToPickUp.push_back(new Letter({ 385, 170 }, 'M',"Res/Letters/letter_M.png"));
+	lettersToPickUp.push_back(new Letter({ 385, 170 }, 'E',"Res/Letters/letter_E.png"));
 	numLettersToCollect = lettersToPickUp.size();
 
 	
@@ -153,7 +153,7 @@ void Game::update()
 				currentLetterToPickUp = lettersToPickUp[index];
 				lettersToPickUp.erase(found);
 		
-				float playerX = player->sprite.getPosition().x; 
+				/*float playerX = player->sprite.getPosition().x; 
 				float playerHalfWidth = player->sprite.getGlobalBounds().width / 2;
 				sf::Vector2f playerXBounds{ playerX - playerHalfWidth, playerX + playerHalfWidth };
 
@@ -166,7 +166,7 @@ void Game::update()
 				{
 					float randPos = rand() % 245 + 245 ;
 					currentLetterToPickUp->sprite.setPosition(randPos, currentLetterToPickUp->sprite.getPosition().y);
-				}
+				}*/
 				
 			}
 		}
@@ -226,11 +226,6 @@ void Game::render()
 	*/
 	this->window->clear();
 
-	// Draw game objects
-	//for (auto & platform : platforms)
-	//{
-	//	platform.render(*this->window);
-	//}
 	for (Platform* p : platforms)
 	{
 		p->render(*this->window);
@@ -244,7 +239,6 @@ void Game::render()
 	if (end)
 	{
 		window->draw(endText);
-		std::cout << "End" << std::endl;
 	}
 
 	this->window->display();
