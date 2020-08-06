@@ -151,23 +151,7 @@ void Game::update()
 			if (found != lettersToPickUp.end())
 			{
 				currentLetterToPickUp = lettersToPickUp[index];
-				lettersToPickUp.erase(found);
-		
-				/*float playerX = player->sprite.getPosition().x; 
-				float playerHalfWidth = player->sprite.getGlobalBounds().width / 2;
-				sf::Vector2f playerXBounds{ playerX - playerHalfWidth, playerX + playerHalfWidth };
-
-				if (playerX > 245)
-				{
-					float randPos = rand() % 245;
-					currentLetterToPickUp->sprite.setPosition(randPos, currentLetterToPickUp->sprite.getPosition().y);
-				}
-				else
-				{
-					float randPos = rand() % 245 + 245 ;
-					currentLetterToPickUp->sprite.setPosition(randPos, currentLetterToPickUp->sprite.getPosition().y);
-				}*/
-				
+				lettersToPickUp.erase(found);			
 			}
 		}
 	}
@@ -205,11 +189,11 @@ void Game::update()
 	{
 		pickedUpLetters.push_back(currentLetterToPickUp);
 		currentLetterToPickUp = nullptr;
-		for (auto letter: pickedUpLetters)
+		/*for (auto letter: pickedUpLetters)
 		{
 			std::cout << letter->letter << " ";
 		}
-		std::cout << std::endl;
+		std::cout << std::endl;*/
 	}
 	if (pickedUpLetters.size()== numLettersToCollect)
 	{

@@ -46,6 +46,7 @@ public:
 	//Accessors
 	const bool running() const;
 	sf::Time time, lastTime;
+	sf::Time addedTime = sf::seconds(2.f);
 	sf::Clock clock; 
 	float deltaTime;
 
